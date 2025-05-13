@@ -292,7 +292,7 @@ public class TelaCadastroProduto extends JFrame {
 				int quantidade;
 				LocalDate validade;
 				try {
-					preco = Float.parseFloat(precoStr);
+					preco = Float.parseFloat(precoStr.replace(",", "."));
 					quantidade = Integer.parseInt(quantidadeStr);
 					// Converter validadeStr para LocalDate
 					validade = LocalDate.parse(validadeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -302,6 +302,14 @@ public class TelaCadastroProduto extends JFrame {
 					erro.setLocationRelativeTo(null);
 					erro.setVisible(true);
 					return;
+				}
+			
+				if (validade.isBefore(LocalDate.now())) {
+				    TelaError erro = new TelaError();
+				    erro.setLabelText("Data de validade já expirou!");
+				    erro.setLocationRelativeTo(null);
+				    erro.setVisible(true);
+				    return;
 				}
 
 				// Verificação de valores negativos

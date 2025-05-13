@@ -319,7 +319,7 @@ public class TelaAlterarProduto extends JFrame {
 				int quantidade;
 				LocalDate validade;
 				try {
-					preco = Float.parseFloat(precoStr);
+					preco = Float.parseFloat(precoStr.replace(",","."));
 					quantidade = Integer.parseInt(quantidadeStr);
 					// Converter validadeStr para LocalDate
 					validade = LocalDate.parse(validadeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));

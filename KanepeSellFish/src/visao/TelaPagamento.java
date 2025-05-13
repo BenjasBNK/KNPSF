@@ -66,7 +66,7 @@ public class TelaPagamento extends JFrame {
 		setMinimumSize(new Dimension(0, 0));
 		setMaximumSize(new Dimension(1920, 1080));
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 668, 427);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
