@@ -24,7 +24,7 @@ public class PopupExcluir extends JFrame {
 	private JPanel contentPane;
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 
-	public PopupExcluir(Produto produtoSelecionado, TelaEstoque tela, Usuario u) {
+	public PopupExcluir(Produto produtoSelecionado, TelaProdutos estaJanelaP, TelaEstoque tela, Usuario u) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 284, 174);

@@ -79,7 +79,7 @@ public class TelaCarrinho extends JFrame {
 		panelLeft = new JPanel();
 		panelLeft.setBackground(new Color(154, 208, 217));
 		contentPane.add(panelLeft, BorderLayout.WEST);
-		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px]"));
+		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px][50px]"));
 
 		JButton btnInicio = new JButton("Inicio");
 		btnInicio.setForeground(new Color(0, 0, 0));
@@ -151,6 +151,21 @@ public class TelaCarrinho extends JFrame {
 		btnEstoque.setBorder(null);
 		btnEstoque.setVisible(isVendedor);
 		panelLeft.add(btnEstoque, "cell 0 3,grow");
+		
+		JButton btnProdutos = new JButton("Produtos");
+		btnProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProdutos TelaProd = new TelaProdutos(u);
+				TelaProd.setLocationRelativeTo(null);
+				TelaProd.setVisible(true);
+				dispose();
+			}
+		});
+		btnProdutos.setOpaque(true);
+		btnProdutos.setForeground(Color.BLACK);
+		btnProdutos.setBorder(null);
+		btnProdutos.setBackground(new Color(154, 205, 217));
+		panelLeft.add(btnProdutos, "cell 0 4,grow");
 
 		JLabel imgMenu = new JLabel("");
 		imgMenu.addMouseListener(new MouseAdapter() {

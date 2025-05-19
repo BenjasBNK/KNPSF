@@ -38,11 +38,11 @@ import modelo.Produto;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
-public class TelaEstoque extends JFrame {
+public class TelaProdutos extends JFrame {
 
 	private static final long serialVersionUID = 3710277884173399876L;
 	private JPanel contentPane;
-	TelaEstoque estaJanela = this;
+	TelaProdutos estaJanelaP = this;
 	public static ArrayList<Produto> listaProdutos;
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 	private static UsuarioDAO uDAO = UsuarioDAO.getInstancia();
@@ -62,7 +62,7 @@ public class TelaEstoque extends JFrame {
 	private JLabel lblFiltroNome;
 	private JTextField txtFiltro;
 	private JLabel lblImagem;
-	private JButton btnProdutos;
+	private JButton btnNewButton_4;
 
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
@@ -78,7 +78,7 @@ public class TelaEstoque extends JFrame {
 //		});
 //	}
 
-	public TelaEstoque(Usuario u) {
+	public TelaProdutos(Usuario u) {
 		setResizable(false);
 		setLocationByPlatform(true);
 		setMinimumSize(new Dimension(1176, 664));
@@ -119,7 +119,7 @@ public class TelaEstoque extends JFrame {
 				}
 			}
 		});
-		imgMenu.setIcon(new ImageIcon(TelaEstoque.class.getResource("/img/menu-hamburguer.png")));
+		imgMenu.setIcon(new ImageIcon(TelaProdutos.class.getResource("/img/menu-hamburguer.png")));
 		panelTop.add(imgMenu, "cell 0 0,alignx trailing");
 		ImageIcon menu = new ImageIcon(TelaInicio.class.getResource("/IMG/menu-hamburguer.png"));
 		Image iconMenu = menu.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -168,7 +168,7 @@ public class TelaEstoque extends JFrame {
 		contentPane.add(panelTabelaProdutos, BorderLayout.CENTER);
 		panelTabelaProdutos.setLayout(new MigLayout("", "[grow]", "[center][50px][grow][]"));
 
-		lblNewLabel = new JLabel("ESTOQUE");
+		lblNewLabel = new JLabel("PRODUTOS");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 27));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panelTabelaProdutos.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
@@ -234,7 +234,7 @@ public class TelaEstoque extends JFrame {
 		table.setBackground(new Color(255, 255, 255));
 		table.setOpaque(false);
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "C\u00F3digo", "Nome", "Quantidade", "Validade", "Pre\u00E7o" }));
+				new String[] { "C\u00F3digo", "Nome", "Validade"}));
 		table.getTableHeader().setBackground(Color.BLACK);
 		scrollPane_1.setViewportView(table);
 
@@ -250,7 +250,7 @@ public class TelaEstoque extends JFrame {
 				if (posicaoSelecionada != -1) {
 
 					Produto produtoSelecionado = ProdutoDAO.listaProdutos.get(posicaoSelecionada);
-					TelaAlterarProduto novaJanela = new TelaAlterarProduto(produtoSelecionado, estaJanela, u);
+					TelaAlterarItens novaJanela = new TelaAlterarItens(produtoSelecionado, estaJanelaP, u);
 					novaJanela.mostrarDados(produtoSelecionado);
 					novaJanela.setLocationRelativeTo(null);
 					novaJanela.setVisible(true);
@@ -276,7 +276,7 @@ public class TelaEstoque extends JFrame {
 				if (posicaoSelecionada != -1) {
 					Produto produtoSelecionado = ProdutoDAO.listaProdutos.get(posicaoSelecionada);
 
-					PopupExcluir erro = new PopupExcluir(produtoSelecionado, null, estaJanela, u);
+					PopupExcluir erro = new PopupExcluir(produtoSelecionado, estaJanelaP, null, u);
 					erro.setLocationRelativeTo(null);
 					erro.setVisible(true);
 				} else {
@@ -300,7 +300,7 @@ public class TelaEstoque extends JFrame {
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				TelaCadastroProduto addProd = new TelaCadastroProduto(estaJanela, u);
+				TelaCadastroItens addProd = new TelaCadastroItens(estaJanelaP, u);
 				addProd.setLocationRelativeTo(null);
 				addProd.setVisible(true);
 
@@ -381,31 +381,31 @@ public class TelaEstoque extends JFrame {
 		btnEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEstoque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaEstoque TelaE = new TelaEstoque(u);
+				TelaE.setLocationRelativeTo(null);
+				TelaE.setVisible(true);
+				dispose();
+				
+				
 
 			}
 		});
-		btnEstoque.setBackground(new Color(96, 154, 168));
+		btnEstoque.setBackground(new Color(154, 205, 217));
 		btnEstoque.setBorder(null);
 		btnEstoque.setOpaque(true);
 		panelMenu.add(btnEstoque, "cell 0 3,grow");
 		
-		btnProdutos = new JButton("Produtos");
-		btnProdutos.setForeground(new Color(0, 0, 0));
-		btnProdutos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnProdutos.addActionListener(new ActionListener() {
+		btnNewButton_4 = new JButton("Produtos");
+		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaProdutos TelaProd = new TelaProdutos(u);
-				TelaProd.setLocationRelativeTo(null);
-				TelaProd.setVisible(true);
-				dispose();
 				
 			}
 		});
-		btnProdutos.setOpaque(true);
-		btnProdutos.setForeground(Color.BLACK);
-		btnProdutos.setBorder(null);
-		btnProdutos.setBackground(new Color(154, 205, 217));
-		panelMenu.add(btnProdutos, "cell 0 4,grow");
+		btnNewButton_4.setOpaque(true);
+		btnNewButton_4.setForeground(Color.BLACK);
+		btnNewButton_4.setBorder(null);
+		btnNewButton_4.setBackground(new Color(96, 154, 168));
+		panelMenu.add(btnNewButton_4, "cell 0 4,grow");
 
 		
 		
@@ -433,7 +433,7 @@ public class TelaEstoque extends JFrame {
 		}
 
 		DefaultTableModel tableModel = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome", "Quantidade", "Validade", "Salinidade" });
+				new String[] { "Nome", "Salinidade", "Pre\u00E7o" });
 
 		for (Produto produto : listaProdutos) {
 			LocalDate validade = produto.getValidade();

@@ -42,7 +42,7 @@ import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.FlowLayout;
 
-public class TelaAlterarProduto extends JFrame {
+public class TelaAlterarItens extends JFrame {
 
 	private JTextField txtNome;
 	private JTextField txtValidade;
@@ -76,7 +76,7 @@ public class TelaAlterarProduto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAlterarProduto(Produto oprod, TelaEstoque estaJanela, Usuario u) {
+	public TelaAlterarItens(Produto oprod, TelaProdutos estaJanela, Usuario u) {
 
 		setTitle("Cadastro de produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroComercio.class.getResource("/img/logo.png")));
@@ -100,7 +100,7 @@ public class TelaAlterarProduto extends JFrame {
 		panelBackground.add(panelTitulo, "cell 0 0,grow");
 		panelTitulo.setLayout(new MigLayout("", "[grow]", "[grow]"));
 
-		JLabel lblTitulo = new JLabel("Alterar Produto");
+		JLabel lblTitulo = new JLabel("Alterar Itens");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		panelTitulo.add(lblTitulo, "cell 0 0,alignx center,aligny center");
 

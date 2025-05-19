@@ -163,7 +163,7 @@ public class TelaPerfilVendedor extends JFrame {
 		panelLeft = new JPanel();
 		panelLeft.setBackground(new Color(154, 208, 217));
 		contentPane.add(panelLeft, BorderLayout.WEST);
-		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px]"));
+		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px][50px]"));
 
 		JButton btnNewButton = new JButton("Inicio");
 		btnNewButton.setForeground(new Color(0, 0, 0));
@@ -210,23 +210,37 @@ public class TelaPerfilVendedor extends JFrame {
 		btnNewButton_2.setBorder(null);
 		btnNewButton_2.setOpaque(true);
 		panelLeft.add(btnNewButton_2, "cell 0 2,grow");
+		
+				JButton btnNewButton_3 = new JButton("Estoque");
+				btnNewButton_3.setForeground(new Color(0, 0, 0));
+				btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnNewButton_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 
-		JButton btnNewButton_3 = new JButton("Estoque");
-		btnNewButton_3.setForeground(new Color(0, 0, 0));
-		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+						TelaEstoque frame = new TelaEstoque(u);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+						dispose();
 
-				TelaEstoque frame = new TelaEstoque(u);
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				dispose();
-
-			}
-		});
-		btnNewButton_3.setBackground(new Color(154, 205, 217));
-		btnNewButton_3.setBorder(null);
-		panelLeft.add(btnNewButton_3, "cell 0 3,grow");
+					}
+				});
+				btnNewButton_3.setBackground(new Color(154, 205, 217));
+				btnNewButton_3.setBorder(null);
+				panelLeft.add(btnNewButton_3, "cell 0 3,grow");
+				
+				JButton btnProdutos = new JButton("Produtos");
+				btnProdutos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaProdutos TelaProd = new TelaProdutos(u);
+						TelaProd.setLocationRelativeTo(null);
+						TelaProd.setVisible(true);
+						dispose();
+					}
+				});
+				btnProdutos.setForeground(Color.BLACK);
+				btnProdutos.setBorder(null);
+				btnProdutos.setBackground(new Color(154, 205, 217));
+				panelLeft.add(btnProdutos, "cell 0 4,grow");
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setMaximumSize(new Dimension(63, 23));

@@ -243,10 +243,10 @@ public class TelaPerfilCliente extends JFrame {
 		contentPane.add(panelLeft, BorderLayout.WEST);
 		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px]"));
 
-		JButton btnNewButton = new JButton("Inicio");
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnInicio = new JButton("Inicio");
+		btnInicio.setForeground(new Color(0, 0, 0));
+		btnInicio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				TelaInicio tela = new TelaInicio(u, isVendedor);
@@ -256,14 +256,14 @@ public class TelaPerfilCliente extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBackground(new Color(154, 205, 217));
-		btnNewButton.setBorder(null);
-		panelLeft.add(btnNewButton, "cell 0 0,grow");
+		btnInicio.setBackground(new Color(154, 205, 217));
+		btnInicio.setBorder(null);
+		panelLeft.add(btnInicio, "cell 0 0,grow");
 
-		JButton btnNewButton_1 = new JButton("Carrinho");
-		btnNewButton_1.setForeground(new Color(0, 0, 0));
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnCarrinho = new JButton("Carrinho");
+		btnCarrinho.setForeground(new Color(0, 0, 0));
+		btnCarrinho.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaCarrinho carrinho = new TelaCarrinho(u, null, isVendedor);
 				carrinho.setLocationRelativeTo(null);
@@ -271,23 +271,23 @@ public class TelaPerfilCliente extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBackground(new Color(154, 205, 217));
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setOpaque(false);
-		panelLeft.add(btnNewButton_1, "cell 0 1,grow");
+		btnCarrinho.setBackground(new Color(154, 205, 217));
+		btnCarrinho.setBorder(null);
+		btnCarrinho.setOpaque(false);
+		panelLeft.add(btnCarrinho, "cell 0 1,grow");
 
-		JButton btnNewButton_2 = new JButton("Perfil");
-		btnNewButton_2.setForeground(new Color(0, 0, 0));
-		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil.setForeground(new Color(0, 0, 0));
+		btnPerfil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 			}
 		});
 
-		btnNewButton_2.setBackground(new Color(96, 154, 168));
-		btnNewButton_2.setBorder(null);
-		panelLeft.add(btnNewButton_2, "cell 0 2,grow");
+		btnPerfil.setBackground(new Color(96, 154, 168));
+		btnPerfil.setBorder(null);
+		panelLeft.add(btnPerfil, "cell 0 2,grow");
 
 		if (isVendedor) {
 			JButton btnNewButton_3 = new JButton("Estoque");

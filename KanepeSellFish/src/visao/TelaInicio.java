@@ -150,7 +150,7 @@ public class TelaInicio extends JFrame {
 		panelLeft = new JPanel();
 		panelLeft.setBackground(new Color(154, 208, 217));
 		contentPane.add(panelLeft, BorderLayout.WEST);
-		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px]"));
+		panelLeft.setLayout(new MigLayout("", "[100px]", "[50px][50px][50px][50px][50px]"));
 
 		JButton btInicio = new JButton("Inicio");
 		btInicio.setForeground(new Color(0, 0, 0));
@@ -244,25 +244,43 @@ public class TelaInicio extends JFrame {
 		ImageIcon conta = new ImageIcon(TelaInicio.class.getResource("/IMG/do-utilizador.png"));
 		Image iconConta = conta.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		imgConta.setIcon(new ImageIcon(iconConta));
+		
+				btEstoque = new JButton("Estoque");
+				btEstoque.setForeground(new Color(0, 0, 0));
+				btEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btEstoque.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 
-		btEstoque = new JButton("Estoque");
-		btEstoque.setForeground(new Color(0, 0, 0));
-		btEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btEstoque.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+						TelaEstoque frame = new TelaEstoque(u);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+						dispose();
 
-				TelaEstoque frame = new TelaEstoque(u);
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				dispose();
-
-			}
-		});
-		btEstoque.setOpaque(false);
-		btEstoque.setBorder(null);
-		btEstoque.setBackground(new Color(154, 205, 217));
-		btEstoque.setVisible(isVendedor);
-		panelLeft.add(btEstoque, "cell 0 3, grow");
+					}
+				});
+				btEstoque.setOpaque(false);
+				btEstoque.setBorder(null);
+				btEstoque.setBackground(new Color(154, 205, 217));
+				btEstoque.setVisible(isVendedor);
+				panelLeft.add(btEstoque, "cell 0 3,grow");
+				
+				JButton btProdutos = new JButton("Produtos");
+				btProdutos.setForeground(new Color(0, 0, 0));
+				btProdutos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btProdutos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaProdutos TelaProd = new TelaProdutos(u);
+						TelaProd.setLocationRelativeTo(null);
+						TelaProd.setVisible(true);
+						dispose();
+						
+					}
+				});
+				btProdutos.setOpaque(false);
+				btProdutos.setForeground(Color.BLACK);
+				btProdutos.setBorder(null);
+				btProdutos.setBackground(new Color(154, 205, 217));
+				panelLeft.add(btProdutos, "cell 0 4,grow");
 
 		lblAddProduto = new JLabel("");
 		lblAddProduto.addMouseListener(new MouseAdapter() {
