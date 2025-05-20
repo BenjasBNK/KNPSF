@@ -76,7 +76,7 @@ public class TelaAlterarProduto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAlterarProduto(Produto oprod, TelaEstoque estaJanela, Usuario u) {
+	public TelaAlterarProduto(Produto oprod, TelaProdutos estaJanelaP, Usuario u) {
 
 		setTitle("Cadastro de produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroComercio.class.getResource("/img/logo.png")));
@@ -348,7 +348,7 @@ public class TelaAlterarProduto extends JFrame {
 				prod.setSalinidade(salinidade);
 
 				if (pDAO.atualizarProduto(oriProd, prod, u)) {
-					estaJanela.atualizarTabela(u, null);
+					estaJanelaP.atualizarTabela(u, null);
 					dispose();
 					TelaError erro = new TelaError();
 					erro.setLabelText("Alterado com sucesso");

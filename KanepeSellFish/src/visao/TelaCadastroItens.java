@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -41,6 +42,7 @@ import controle.ProdutoDAO;
 import modelo.Produto;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JComboBox;
 
 public class TelaCadastroItens extends JFrame {
 
@@ -49,16 +51,17 @@ public class TelaCadastroItens extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNome;
 	private JTextField txtValidade;
 	private JTextField txtPreco;
 	private JTextField txtQuantidade;
 	private FileInputStream fis;
+	public static ArrayList<Produto> listaProdutos = new ArrayList<>();
+
 	private static Imagem img = Imagem.getInstancia();
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 	Produto prod = new Produto();
 
-	public TelaCadastroItens(TelaProdutos estaJanela, Usuario u) {
+	public TelaCadastroItens(TelaEstoque estaJanela, Usuario u) {
 		setTitle("Cadastro de produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroComercio.class.getResource("/img/logo.png")));
 		setResizable(false);
@@ -95,15 +98,14 @@ public class TelaCadastroItens extends JFrame {
 		panelInformacoes.add(panelEsquerda);
 		panelEsquerda
 				.setLayout(new MigLayout("", "[grow]", "[50px][30px,grow][50px][30px,grow][50px][30px,grow][50px]"));
+		
 
-		txtNome = new JTextField();
-		txtNome.setOpaque(false);
-		txtNome.setColumns(10);
-		txtNome.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
-				"<html>Nome<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
-		txtNome.setBackground(SystemColor.menu);
-		panelEsquerda.add(txtNome, "cell 0 0,grow");
+		JComboBox<String> cbProdutos = new JComboBox();
+		for (Produto produto : listaProdutos) {
+			cbProdutos.addItem(produto.getNome());
+		}
+	
+		panelEsquerda.add(cbProdutos, "cell 0 0,growx,aligny center");
 
 		txtValidade = new JTextField();
 		txtValidade.setOpaque(false);
@@ -215,22 +217,7 @@ public class TelaCadastroItens extends JFrame {
 		lblAdcImagem.setForeground(new Color(0, 128, 255));
 		panelDireita.add(lblAdcImagem, "cell 0 1,alignx right");
 
-		JRadioButton rdbtnDoce = new JRadioButton("Água doce");
-		rdbtnDoce.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		rdbtnDoce.setBorder(null);
-		rdbtnDoce.setOpaque(false);
-		rdbtnDoce.setSelected(true);
-		panelDireita.add(rdbtnDoce, "flowx,cell 0 2");
-
-		JRadioButton rdbtnSalgada = new JRadioButton("Água salgada");
-		rdbtnSalgada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		rdbtnSalgada.setBorder(null);
-		rdbtnSalgada.setOpaque(false);
-		panelDireita.add(rdbtnSalgada, "cell 0 2");
-
 		ButtonGroup grupoRadio = new ButtonGroup();
-		grupoRadio.add(rdbtnDoce);
-		grupoRadio.add(rdbtnSalgada);
 
 		JPanel panelBotoes = new JPanel();
 		panelBotoes.setOpaque(false);
@@ -273,14 +260,13 @@ public class TelaCadastroItens extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 
-				String nome = txtNome.getText();
 				String validadeStr = txtValidade.getText();
 				String precoStr = txtPreco.getText();
 				String quantidadeStr = txtQuantidade.getText();
-				Boolean salinidade = rdbtnDoce.isSelected();
+		
 
 				// Verificação de campos vazios
-				if (nome.isEmpty() || validadeStr.isEmpty() || precoStr.isEmpty() || quantidadeStr.isEmpty()) {
+				if (validadeStr.isEmpty() || precoStr.isEmpty() || quantidadeStr.isEmpty()) {
 					TelaError erro = new TelaError();
 					erro.setLabelText("Campos inseridos incorretamente");
 					erro.setLocationRelativeTo(null);
@@ -322,11 +308,10 @@ public class TelaCadastroItens extends JFrame {
 				}
 
 				// Preenchendo os atributos do produto
-				prod.setNome(nome);
+
 				prod.setQuantidadeEstoque(quantidade);
 				prod.setPreco(preco);
 				prod.setValidade(validade); // Descomente se necessário
-				prod.setSalinidade(salinidade);
 
 				if (pDAO.inserirProduto(prod, u)) {
 					estaJanela.atualizarTabela(u, null);

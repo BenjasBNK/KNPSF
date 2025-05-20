@@ -12,10 +12,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -250,7 +252,7 @@ public class TelaEstoque extends JFrame {
 				if (posicaoSelecionada != -1) {
 
 					Produto produtoSelecionado = ProdutoDAO.listaProdutos.get(posicaoSelecionada);
-					TelaAlterarProduto novaJanela = new TelaAlterarProduto(produtoSelecionado, estaJanela, u);
+					TelaAlterarItens novaJanela = new TelaAlterarItens(produtoSelecionado, estaJanela, u);
 					novaJanela.mostrarDados(produtoSelecionado);
 					novaJanela.setLocationRelativeTo(null);
 					novaJanela.setVisible(true);
@@ -300,9 +302,9 @@ public class TelaEstoque extends JFrame {
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				TelaCadastroProduto addProd = new TelaCadastroProduto(estaJanela, u);
-				addProd.setLocationRelativeTo(null);
-				addProd.setVisible(true);
+				TelaCadastroItens addItem = new TelaCadastroItens(estaJanela, u);
+				addItem.setLocationRelativeTo(null);
+				addItem.setVisible(true);
 
 			}
 		});
@@ -375,37 +377,37 @@ public class TelaEstoque extends JFrame {
 		btnPerfil.setBorder(null);
 		btnPerfil.setOpaque(false);
 		panelMenu.add(btnPerfil, "cell 0 2,grow");
-
-		JButton btnEstoque = new JButton("Estoque");
-		btnEstoque.setForeground(new Color(0, 0, 0));
-		btnEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEstoque.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnEstoque.setBackground(new Color(96, 154, 168));
-		btnEstoque.setBorder(null);
-		btnEstoque.setOpaque(true);
-		panelMenu.add(btnEstoque, "cell 0 3,grow");
 		
-		btnProdutos = new JButton("Produtos");
-		btnProdutos.setForeground(new Color(0, 0, 0));
-		btnProdutos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnProdutos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaProdutos TelaProd = new TelaProdutos(u);
-				TelaProd.setLocationRelativeTo(null);
-				TelaProd.setVisible(true);
-				dispose();
+				JButton btnEstoque = new JButton("Estoque");
+				btnEstoque.setForeground(new Color(0, 0, 0));
+				btnEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnEstoque.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
 				
-			}
-		});
-		btnProdutos.setOpaque(true);
-		btnProdutos.setForeground(Color.BLACK);
-		btnProdutos.setBorder(null);
-		btnProdutos.setBackground(new Color(154, 205, 217));
-		panelMenu.add(btnProdutos, "cell 0 4,grow");
+				btnProdutos = new JButton("Produtos");
+				btnProdutos.setForeground(new Color(0, 0, 0));
+				btnProdutos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnProdutos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaProdutos TelaProd = new TelaProdutos(u);
+						TelaProd.setLocationRelativeTo(null);
+						TelaProd.setVisible(true);
+						dispose();
+						
+					}
+				});
+				btnProdutos.setOpaque(true);
+				btnProdutos.setForeground(Color.BLACK);
+				btnProdutos.setBorder(null);
+				btnProdutos.setBackground(new Color(154, 205, 217));
+				panelMenu.add(btnProdutos, "cell 0 3,grow");
+				btnEstoque.setBackground(new Color(96, 154, 168));
+				btnEstoque.setBorder(null);
+				btnEstoque.setOpaque(true);
+				panelMenu.add(btnEstoque, "cell 0 4,grow");
 
 		
 		
@@ -433,12 +435,14 @@ public class TelaEstoque extends JFrame {
 		}
 
 		DefaultTableModel tableModel = new DefaultTableModel(new Object[][] {},
-				new String[] { "Nome", "Quantidade", "Validade", "Salinidade" });
+				new String[] {"C\u00F3digo", "Nome", "Quantidade", "Validade", "Salinidade", "Pre\u00E7o" });
 
 		for (Produto produto : listaProdutos) {
 			LocalDate validade = produto.getValidade();
 			DateTimeFormatter desiredFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			String formattedDate = validade.format(desiredFormatter);
+		    NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		    String precoFormatado = formatoMoeda.format(produto.getPreco());
 			String salinidade;
 
 			if (produto.getSalinidade() != null && produto.getSalinidade() == true) {
@@ -447,8 +451,8 @@ public class TelaEstoque extends JFrame {
 				salinidade = "Salgada";
 			}
 
-			tableModel.addRow(new Object[] { produto.getNome(), produto.getQuantidadeEstoque(), formattedDate,
-					salinidade, produto.getPreco() });
+			tableModel.addRow(new Object[] { produto.getIdProduto(), produto.getNome(), produto.getQuantidadeEstoque(), formattedDate,
+					salinidade, precoFormatado });
 		}
 
 		table.setModel(tableModel);

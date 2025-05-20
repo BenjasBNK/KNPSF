@@ -244,25 +244,6 @@ public class TelaInicio extends JFrame {
 		ImageIcon conta = new ImageIcon(TelaInicio.class.getResource("/IMG/do-utilizador.png"));
 		Image iconConta = conta.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		imgConta.setIcon(new ImageIcon(iconConta));
-		
-				btEstoque = new JButton("Estoque");
-				btEstoque.setForeground(new Color(0, 0, 0));
-				btEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btEstoque.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-
-						TelaEstoque frame = new TelaEstoque(u);
-						frame.setLocationRelativeTo(null);
-						frame.setVisible(true);
-						dispose();
-
-					}
-				});
-				btEstoque.setOpaque(false);
-				btEstoque.setBorder(null);
-				btEstoque.setBackground(new Color(154, 205, 217));
-				btEstoque.setVisible(isVendedor);
-				panelLeft.add(btEstoque, "cell 0 3,grow");
 				
 				JButton btProdutos = new JButton("Produtos");
 				btProdutos.setForeground(new Color(0, 0, 0));
@@ -280,7 +261,26 @@ public class TelaInicio extends JFrame {
 				btProdutos.setForeground(Color.BLACK);
 				btProdutos.setBorder(null);
 				btProdutos.setBackground(new Color(154, 205, 217));
-				panelLeft.add(btProdutos, "cell 0 4,grow");
+				panelLeft.add(btProdutos, "flowy,cell 0 3,grow");
+				
+						btEstoque = new JButton("Estoque");
+						btEstoque.setForeground(new Color(0, 0, 0));
+						btEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						btEstoque.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								TelaEstoque frame = new TelaEstoque(u);
+								frame.setLocationRelativeTo(null);
+								frame.setVisible(true);
+								dispose();
+
+							}
+						});
+						btEstoque.setOpaque(false);
+						btEstoque.setBorder(null);
+						btEstoque.setBackground(new Color(154, 205, 217));
+						btEstoque.setVisible(isVendedor);
+						panelLeft.add(btEstoque, "cell 0 4,grow");
 
 		lblAddProduto = new JLabel("");
 		lblAddProduto.addMouseListener(new MouseAdapter() {
@@ -289,7 +289,7 @@ public class TelaInicio extends JFrame {
 				TelaEstoque estoque = new TelaEstoque(u);
 				estoque.setLocationRelativeTo(null);
 				estoque.setVisible(true);
-				TelaCadastroProduto cadastro = new TelaCadastroProduto(estoque, u);
+				TelaCadastroProduto cadastro = new TelaCadastroProduto(null, u);
 				cadastro.setLocationRelativeTo(null);
 				cadastro.setVisible(true);
 				dispose();

@@ -41,17 +41,14 @@ import modelo.Produto;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.FlowLayout;
+import javax.swing.JComboBox;
 
 public class TelaAlterarItens extends JFrame {
-
-	private JTextField txtNome;
 	private JTextField txtValidade;
 	private JTextField txtPreco;
 	private JTextField txtQuantidade;
 	private JLabel lblImagem;
 	private ProdutoDAO pDAO = ProdutoDAO.getInstancia();
-	private JRadioButton rdbtnDoce;
-	private JRadioButton rdbtnSalgada;
 	private FileInputStream fis;
 	private static Imagem img = Imagem.getInstancia();
 	Produto prod = new Produto();
@@ -76,7 +73,7 @@ public class TelaAlterarItens extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAlterarItens(Produto oprod, TelaProdutos estaJanela, Usuario u) {
+	public TelaAlterarItens(Produto oprod, TelaEstoque estaJanela, Usuario u) {
 
 		setTitle("Cadastro de produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroComercio.class.getResource("/img/logo.png")));
@@ -115,16 +112,10 @@ public class TelaAlterarItens extends JFrame {
 		panelInformacoes.add(panelEsquerda);
 		panelEsquerda
 				.setLayout(new MigLayout("", "[grow]", "[50px][30px,grow][50px][30px,grow][50px][30px,grow][50px]"));
-
-		txtNome = new JTextField();
-		txtNome.setOpaque(false);
-		txtNome.setToolTipText("");
-		txtNome.setColumns(10);
-		txtNome.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
-				"<html>Nome<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
-		txtNome.setBackground(SystemColor.menu);
-		panelEsquerda.add(txtNome, "cell 0 0,grow");
+		
+		JComboBox cbProdutos = new JComboBox();
+		cbProdutos.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelEsquerda.add(cbProdutos, "cell 0 0,growx,aligny center");
 
 		txtValidade = new JTextField();
 		txtValidade.setOpaque(false);
@@ -235,22 +226,7 @@ public class TelaAlterarItens extends JFrame {
 		lblAdcImagem.setForeground(new Color(0, 128, 255));
 		panelDireita.add(lblAdcImagem, "cell 0 1,alignx right");
 
-		rdbtnDoce = new JRadioButton("Água doce");
-		rdbtnDoce.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		rdbtnDoce.setBorder(null);
-		rdbtnDoce.setOpaque(false);
-		rdbtnDoce.setSelected(true);
-		panelDireita.add(rdbtnDoce, "flowx,cell 0 2");
-
-		rdbtnSalgada = new JRadioButton("Água salgada");
-		rdbtnSalgada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		rdbtnSalgada.setBorder(null);
-		rdbtnSalgada.setOpaque(false);
-		panelDireita.add(rdbtnSalgada, "cell 0 2");
-
 		ButtonGroup g = new ButtonGroup();
-		g.add(rdbtnSalgada);
-		g.add(rdbtnDoce);
 
 		JPanel panelBotoes = new JPanel();
 		panelBotoes.setOpaque(false);
@@ -295,19 +271,13 @@ public class TelaAlterarItens extends JFrame {
 
 				oriProd = oprod;
 
-				String nome = txtNome.getText();
+	
 				String validadeStr = txtValidade.getText();
 				String precoStr = txtPreco.getText();
 				String quantidadeStr = txtQuantidade.getText();
-				Boolean salinidade;
-				if (rdbtnDoce.isSelected()) {
-					salinidade = true;
-				} else {
-					salinidade = false;
-				}
-
+	
 				// Verificação de campos vazios
-				if (nome.isEmpty() || validadeStr.isEmpty() || precoStr.isEmpty() || quantidadeStr.isEmpty()) {
+				if (validadeStr.isEmpty() || precoStr.isEmpty() || quantidadeStr.isEmpty()) {
 					TelaError erro = new TelaError();
 					erro.setLabelText("Campos inseridos incorretamente");
 					erro.setLocationRelativeTo(null);
@@ -341,11 +311,11 @@ public class TelaAlterarItens extends JFrame {
 				}
 
 				// Preenchendo os atributos do produto
-				prod.setNome(nome);
+
 				prod.setQuantidadeEstoque(quantidade);
 				prod.setPreco(preco);
 				prod.setValidade(validade); // Descomente se necessário
-				prod.setSalinidade(salinidade);
+	
 
 				if (pDAO.atualizarProduto(oriProd, prod, u)) {
 					estaJanela.atualizarTabela(u, null);
@@ -374,13 +344,13 @@ public class TelaAlterarItens extends JFrame {
 	    DateTimeFormatter desiredFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    String formattedDate = validade.format(desiredFormatter);
 
-	    if (produtoSelecionado.getSalinidade() != null && produtoSelecionado.getSalinidade()) {
+	/*    if (produtoSelecionado.getSalinidade() != null && produtoSelecionado.getSalinidade()) {
 	        rdbtnDoce.setSelected(true);
 	    } else {
 	        rdbtnSalgada.setSelected(true);
 	    }
-
-	    txtNome.setText(produtoSelecionado.getNome());
+		
+	    cbProdutos.setText(produtoSelecionado.getNome());*/
 	    txtQuantidade.setText(String.valueOf(produtoSelecionado.getQuantidadeEstoque()));
 	    txtValidade.setText(formattedDate);
 	    txtPreco.setText(String.valueOf(produtoSelecionado.getPreco()));

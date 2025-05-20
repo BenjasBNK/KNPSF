@@ -58,7 +58,7 @@ public class TelaCadastroProduto extends JFrame {
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 	Produto prod = new Produto();
 
-	public TelaCadastroProduto(TelaEstoque janelaPrincipal, Usuario u) {
+	public TelaCadastroProduto(TelaProdutos estaJanelaP, Usuario u) {
 		setTitle("Cadastro de produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroComercio.class.getResource("/img/logo.png")));
 		setResizable(false);
@@ -329,7 +329,7 @@ public class TelaCadastroProduto extends JFrame {
 				prod.setSalinidade(salinidade);
 
 				if (pDAO.inserirProduto(prod, u)) {
-					janelaPrincipal.atualizarTabela(u, null);
+					estaJanelaP.atualizarTabela(u, null);
 					
 					dispose();
 					TelaError erro = new TelaError();

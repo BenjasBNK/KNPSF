@@ -133,24 +133,6 @@ public class TelaCarrinho extends JFrame {
 		btnPerfil.setBorder(null);
 		btnPerfil.setOpaque(true);
 		panelLeft.add(btnPerfil, "cell 0 2,grow");
-
-		btnEstoque = new JButton("Estoque");
-		btnEstoque.setForeground(new Color(0, 0, 0));
-		btnEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEstoque.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				TelaEstoque frame = new TelaEstoque(u);
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				dispose();
-
-			}
-		});
-		btnEstoque.setBackground(new Color(154, 205, 217));
-		btnEstoque.setBorder(null);
-		btnEstoque.setVisible(isVendedor);
-		panelLeft.add(btnEstoque, "cell 0 3,grow");
 		
 		JButton btnProdutos = new JButton("Produtos");
 		btnProdutos.addActionListener(new ActionListener() {
@@ -165,7 +147,25 @@ public class TelaCarrinho extends JFrame {
 		btnProdutos.setForeground(Color.BLACK);
 		btnProdutos.setBorder(null);
 		btnProdutos.setBackground(new Color(154, 205, 217));
-		panelLeft.add(btnProdutos, "cell 0 4,grow");
+		panelLeft.add(btnProdutos, "cell 0 3,grow");
+		
+				btnEstoque = new JButton("Estoque");
+				btnEstoque.setForeground(new Color(0, 0, 0));
+				btnEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnEstoque.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						TelaEstoque frame = new TelaEstoque(u);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+						dispose();
+
+					}
+				});
+				btnEstoque.setBackground(new Color(154, 205, 217));
+				btnEstoque.setBorder(null);
+				btnEstoque.setVisible(isVendedor);
+				panelLeft.add(btnEstoque, "cell 0 4,grow");
 
 		JLabel imgMenu = new JLabel("");
 		imgMenu.addMouseListener(new MouseAdapter() {
