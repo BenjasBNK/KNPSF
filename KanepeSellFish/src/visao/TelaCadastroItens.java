@@ -56,7 +56,8 @@ public class TelaCadastroItens extends JFrame {
 	private JTextField txtQuantidade;
 	private FileInputStream fis;
 	public static ArrayList<Produto> listaProdutos = new ArrayList<>();
-
+	private JComboBox cbProdutos;
+	
 	private static Imagem img = Imagem.getInstancia();
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 	Produto prod = new Produto();
@@ -100,11 +101,14 @@ public class TelaCadastroItens extends JFrame {
 				.setLayout(new MigLayout("", "[grow]", "[50px][30px,grow][50px][30px,grow][50px][30px,grow][50px]"));
 		
 
-		JComboBox<String> cbProdutos = new JComboBox();
-		for (Produto produto : listaProdutos) {
-			cbProdutos.addItem(produto.getNome());
+		listaProdutos = ProdutoDAO.getInstancia().addTodosProd();
+
+		cbProdutos = new JComboBox<>();
+
+		// Supondo que listaProdutos já esteja carregada em algum lugar
+		for (Produto p : listaProdutos) {
+		    cbProdutos.addItem(p);
 		}
-	
 		panelEsquerda.add(cbProdutos, "cell 0 0,growx,aligny center");
 
 		txtValidade = new JTextField();

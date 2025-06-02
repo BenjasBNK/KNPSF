@@ -26,7 +26,7 @@ public class PopupExcluirCarrinho extends JFrame {
 
 	public PopupExcluirCarrinho(Usuario u, ItemCarrinho item, TelaCarrinho telaCarrinho, Boolean isVendedor) {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 284, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

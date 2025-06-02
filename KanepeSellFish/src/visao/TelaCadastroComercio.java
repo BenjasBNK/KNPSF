@@ -66,7 +66,7 @@ public class TelaCadastroComercio extends JFrame {
 		setMinimumSize(new Dimension(1176, 664));
 		setMaximumSize(new Dimension(1920, 1080));
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1280, 768);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().setLayout(new BorderLayout(0, 0));

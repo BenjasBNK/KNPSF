@@ -26,7 +26,7 @@ public class PopupExcluir extends JFrame {
 
 	public PopupExcluir(Produto produtoSelecionado, TelaProdutos estaJanelaP, TelaEstoque tela, Usuario u) {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 284, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

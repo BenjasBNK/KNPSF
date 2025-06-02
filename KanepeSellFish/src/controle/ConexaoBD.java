@@ -33,7 +33,7 @@ public class ConexaoBD {
 		String username = "root";
 
 		// A senha de acesso do usuário informado acima.
-		String password = "aluno";
+		String password = "admin";
 
 		try {
 			connection = DriverManager.getConnection(url, username, password);

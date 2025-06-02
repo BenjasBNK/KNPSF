@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -48,10 +49,14 @@ public class TelaAlterarItens extends JFrame {
 	private JTextField txtPreco;
 	private JTextField txtQuantidade;
 	private JLabel lblImagem;
+	private JComboBox cbProdutos;
 	private ProdutoDAO pDAO = ProdutoDAO.getInstancia();
 	private FileInputStream fis;
 	private static Imagem img = Imagem.getInstancia();
 	Produto prod = new Produto();
+	public static ArrayList<Produto> listaProdutos;
+		
+	
 
 	/**
 	 * Launch the application.
@@ -112,8 +117,20 @@ public class TelaAlterarItens extends JFrame {
 		panelInformacoes.add(panelEsquerda);
 		panelEsquerda
 				.setLayout(new MigLayout("", "[grow]", "[50px][30px,grow][50px][30px,grow][50px][30px,grow][50px]"));
+		 
+		listaProdutos = ProdutoDAO.getInstancia().addTodosProd();
+
+		cbProdutos = new JComboBox<>();
+
+		// Supondo que listaProdutos já esteja carregada em algum lugar
+		for (Produto p : listaProdutos) {
+		    cbProdutos.addItem(p);
+		}
 		
-		JComboBox cbProdutos = new JComboBox();
+
+		// Preenche com os objetos Produto
+
+		
 		cbProdutos.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelEsquerda.add(cbProdutos, "cell 0 0,growx,aligny center");
 

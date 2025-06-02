@@ -27,6 +27,11 @@ public class Produto {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
+	@Override
+	public String toString() {
+	    return this.getNome(); // Substitua por seu atributo correto
+	}
+
 	public String getNome() {
 		return nome;
 	}
