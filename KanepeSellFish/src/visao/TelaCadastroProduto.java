@@ -50,9 +50,7 @@ public class TelaCadastroProduto extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNome;
-	private JTextField txtValidade;
 	private JTextField txtPreco;
-	private JTextField txtQuantidade;
 	private FileInputStream fis;
 	private static Imagem img = Imagem.getInstancia();
 	private static ProdutoDAO pDAO = ProdutoDAO.getInstancia();
@@ -104,33 +102,15 @@ public class TelaCadastroProduto extends JFrame {
 				new Color(0, 0, 0)));
 		txtNome.setBackground(SystemColor.menu);
 		panelEsquerda.add(txtNome, "cell 0 0,grow");
-
-		txtValidade = new JTextField();
-		txtValidade.setOpaque(false);
-		txtValidade.setColumns(10);
-		txtValidade.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
-				"<html>Validade<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
-		txtValidade.setBackground(SystemColor.menu);
-		panelEsquerda.add(txtValidade, "cell 0 2,grow");
-
-		txtQuantidade = new JTextField();
-		txtQuantidade.setOpaque(false);
-		txtQuantidade.setColumns(10);
-		txtQuantidade.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
-				"<html>Quantidade<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP,
-				null, new Color(0, 0, 0)));
-		txtQuantidade.setBackground(SystemColor.menu);
-		panelEsquerda.add(txtQuantidade, "cell 0 4,grow");
-
-		txtPreco = new JTextField();
-		txtPreco.setOpaque(false);
-		txtPreco.setColumns(10);
-		txtPreco.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
-				"<html>Preco<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
-		txtPreco.setBackground(SystemColor.menu);
-		panelEsquerda.add(txtPreco, "cell 0 6,grow");
+		
+				txtPreco = new JTextField();
+				txtPreco.setOpaque(false);
+				txtPreco.setColumns(10);
+				txtPreco.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2),
+						"<html>Preco<span style='color: red;'>*</span></html>", TitledBorder.LEADING, TitledBorder.TOP, null,
+						new Color(0, 0, 0)));
+				txtPreco.setBackground(SystemColor.menu);
+				panelEsquerda.add(txtPreco, "cell 0 2,grow");
 
 		JPanel panelDireita = new JPanel();
 		panelDireita.setOpaque(false);
